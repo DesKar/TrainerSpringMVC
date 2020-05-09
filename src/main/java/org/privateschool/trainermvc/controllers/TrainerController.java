@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/")
@@ -28,12 +29,14 @@ public class TrainerController {
     MessageSource messageSource;
 
     @RequestMapping(value = {"/", "/list"}, method = RequestMethod.GET)
-    public String listAllTrainers(ModelMap view) {
+    public String listAllTrainers(ModelMap view, @RequestParam(required = false) String alert, @RequestParam(required = false) String success) {
         List<Trainer> trainers = trainerService.findAll();
         view.addAttribute("trainers", trainers);
         view.addAttribute("editurl", editurl);
         view.addAttribute("deleteurl", deleteurl);
         view.addAttribute("newurl", newurl);
+        view.addAttribute("alert", alert);
+        view.addAttribute("success", success);
         return ("trainerlist");
     }
 
@@ -49,17 +52,20 @@ public class TrainerController {
     public String saveStudent(ModelMap view, Trainer trainer) {
         view.addAttribute("listurl", listurl);
         if (trainerService.save(trainer)) {
-            return ("redirect:/list");
+            view.addAttribute("success", new String("Trainer was added successfully!"));
         } else {
-            view.addAttribute("message", new String("Something went wrong. Please add the trainer again!"));
-            return ("redirect:/new");
+            view.addAttribute("alert", new String("Something went wrong. Please add the trainer again!"));
         }
-
+        return ("redirect:/list");
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteStudent(ModelMap view, @PathVariable int id) {
-        trainerService.delete(id);
+        if (trainerService.delete(id)) {
+            view.addAttribute("success", new String("Trainer was deleted successfully!"));
+        } else {
+            view.addAttribute("alert", new String("Something went wrong. Please delete the trainer again!"));
+        }
         return ("redirect:/list");
     }
 

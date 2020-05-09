@@ -76,6 +76,21 @@
                         <a href="<c:url value='${newurl}'/>" class="btn btn-secondary btn-sm" role="button" aria-pressed="true">Add trainer</a>
                     </td>
                 </div>
+                <% String alert = (String) request.getAttribute("alert");
+                    String success = (String) request.getAttribute("success");
+                %>
+                <div class="alert alert-warning alert-dismissible fade hidden" role="alert">
+                    ${alert}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="alert alert-success alert-dismissible fade hidden" role="alert">                    
+                    ${success}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             </div>
         </main>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"

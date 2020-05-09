@@ -41,36 +41,14 @@
         </header>
         <main>
             <div class="container mt-4">
-                <div id="form-container" class="card">
-                    <div id="form-title" class="card-header">Add a new trainer</div>
-                    <div class="card-body">
-                        <form:form method="POST" action="new" modelAttribute="trainer">
-                            <form:input type="hidden" path="id" id="id"/>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="firstName">First name</label>
-                                    <form:input type="text" class="form-control" maxlength="45" id="firstName" path="firstName" required="required"/>
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label for="lastName">Last name</label>
-                                    <form:input type="text" class="form-control" maxlength="45" id="lastName" path="lastName" required="required"/>
-
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="subject">Subject</label>
-                                <form:input type="text" class="form-control" maxlength="45" id="subject" path="subject" required="required"/>
-
-                            </div>
-                            <div class="alert alert-danger">${message}</div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                            <a href="<c:url value='${listurl}'/>" class="btn btn-primary" type="reset" role="button" aria-pressed="true">Cancel</a>
-                        </form:form>
-                    </div>
-
-                </div>
+                <div class="alert alert-danger">${message}</div>
+                <% String listurlFINAL = (String)request.getAttribute("listurl");
+                    session.setAttribute("listurlFINAL", listurlFINAL);
+                    out.print(listurlFINAL);
+                %>
+                <a href="<c:url value='${listurlFINAL}'/>" class="btn btn-primary" type="reset" role="button" aria-pressed="true">Back to trainer list</a>
             </div>
+
         </main>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"
         integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
