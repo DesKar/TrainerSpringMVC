@@ -8,5 +8,7 @@ public interface ITrainer {
     public List<Trainer> findAll();
 
     public boolean save(Trainer trainer);
+    
+    public boolean delete(int id);
 
 }

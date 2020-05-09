@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/")
@@ -57,16 +57,12 @@ public class TrainerController {
 
     }
 
-//    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-//    public String deleteStudent(ModelMap view, @PathVariable int id) {
-//        if (studentService.delete(id)) {
-//            view.addAttribute("msg", new String("Deleted Successfully!"));
-//        } else {
-//            view.addAttribute("msg", new String("Not Deleted!"));
-//        }
-//        return ("redirect:/list");
-//    }
-//
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String deleteStudent(ModelMap view, @PathVariable int id) {
+        trainerService.delete(id);
+        return ("redirect:/list");
+    }
+
 //    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 //    public String editStudent(ModelMap view, @PathVariable int id) {
 //        Student student = studentService.findById(id);

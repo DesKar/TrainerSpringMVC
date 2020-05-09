@@ -26,4 +26,9 @@ public class TrainerImpl implements ITrainer {
 
     }
 
+    @Override
+    public boolean delete(int id) {
+        return dao.delete(id);
+    }
+
 }

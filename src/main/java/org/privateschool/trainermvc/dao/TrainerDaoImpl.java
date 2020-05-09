@@ -23,4 +23,15 @@ public class TrainerDaoImpl extends AbstractDao<Integer, Trainer> implements ITr
         return true;
     }
 
+    public boolean delete(int id) {
+        Trainer t = getByKey(id);
+        if (t != null) {
+            delete(t);
+            if (getByKey(id) == null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

@@ -9,4 +9,6 @@ public interface ITrainerDao {
 
     public boolean save(Trainer trainer);
 
+    public boolean delete(int id);
+
 }
