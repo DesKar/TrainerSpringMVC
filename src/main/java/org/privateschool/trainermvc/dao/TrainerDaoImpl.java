@@ -27,6 +27,7 @@ public class TrainerDaoImpl extends AbstractDao<Integer, Trainer> implements ITr
     @Override
     public boolean save(Trainer trainer) {
         boolean notSaved = persist(trainer);
+        
         return !notSaved;
     }
 
@@ -47,7 +48,7 @@ public class TrainerDaoImpl extends AbstractDao<Integer, Trainer> implements ITr
         dbTrainer.setFirstName(trainer.getFirstName());
         dbTrainer.setLastName(trainer.getLastName());
         dbTrainer.setSubject(trainer.getSubject());
-        return !save(dbTrainer);
+        return save(dbTrainer);
     }
 
 }

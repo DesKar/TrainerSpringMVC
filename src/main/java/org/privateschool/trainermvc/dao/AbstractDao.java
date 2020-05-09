@@ -32,6 +32,7 @@ public abstract class AbstractDao<PK extends Serializable, T> {
 
 	public boolean persist(T entity) {
 		getSession().persist(entity);
+                getSession().flush();
                 return getSession().isDirty();
 	}
 
