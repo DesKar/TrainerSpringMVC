@@ -69,22 +69,27 @@ public class TrainerController {
         return ("redirect:/list");
     }
 
-//    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-//    public String editStudent(ModelMap view, @PathVariable int id) {
-//        Student student = studentService.findById(id);
-//        view.addAttribute("student", student);
-//        view.addAttribute("listurl", listurl);
-//        view.addAttribute("updateurl", updateurl);
-//        return "editstudent";
-//    }
-//
-//    @RequestMapping(value = "/update", method = RequestMethod.POST)
-//    public String updateStudent(ModelMap view, Student student) {
-//        if (studentService.update(student)) {
-//            view.addAttribute("msg", new String("Edited Successfully!"));
-//        } else {
-//            view.addAttribute("msg", new String("Not Edited!"));
-//        }
-//        return ("redirect:/list");
-//    }
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String editTrainer(ModelMap view, @PathVariable int id) {
+        Trainer trainer = trainerService.findById(id);
+        if (trainer == null) {
+            view.addAttribute("alert", new String("The trainer does not exist any more."));
+            return ("redirect:/list");
+        } else {
+            view.addAttribute("trainer", trainer);
+            view.addAttribute("listurl", listurl);
+            view.addAttribute("updateurl", updateurl);
+            return "edittrainer";
+        }
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String updateStudent(ModelMap view, Trainer trainer) {
+        if (trainerService.update(trainer)) {
+            view.addAttribute("success", new String("Trainer was updated successfully!!"));
+        } else {
+            view.addAttribute("alert", new String("Something went wrong. Please update the trainer again!"));
+        }
+        return ("redirect:/list");
+    }
 }

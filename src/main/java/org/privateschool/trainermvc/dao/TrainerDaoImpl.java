@@ -15,12 +15,19 @@ public class TrainerDaoImpl extends AbstractDao<Integer, Trainer> implements ITr
     }
 
     @Override
+    public Trainer findById(int id) {
+        Trainer t = getByKey(id);
+        if (t != null) {
+            return t;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
     public boolean save(Trainer trainer) {
         boolean notSaved = persist(trainer);
-        if (notSaved) {
-            return false;
-        }
-        return true;
+        return !notSaved;
     }
 
     public boolean delete(int id) {
@@ -32,6 +39,15 @@ public class TrainerDaoImpl extends AbstractDao<Integer, Trainer> implements ITr
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean update(Trainer trainer) {
+        Trainer dbTrainer = findById(trainer.getId());
+        dbTrainer.setFirstName(trainer.getFirstName());
+        dbTrainer.setLastName(trainer.getLastName());
+        dbTrainer.setSubject(trainer.getSubject());
+        return !save(dbTrainer);
     }
 
 }

@@ -20,6 +20,15 @@ public class TrainerImpl implements ITrainer {
         return trainers;
     }
 
+    public Trainer findById(int id) {
+        Trainer t = dao.findById(id);
+        if (t != null) {
+            return t;
+        } else {
+            return null;
+        }
+    }
+
     @Override
     public boolean save(Trainer trainer) {
         return dao.save(trainer);
@@ -30,5 +39,9 @@ public class TrainerImpl implements ITrainer {
     public boolean delete(int id) {
         return dao.delete(id);
     }
-
+    
+    @Override
+    public boolean update(Trainer trainer) {
+        return dao.update(trainer);
+    }
 }
