@@ -1,17 +1,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
-<html lang="en">
-
+<!DOCTYPE html>
+<html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-        <title>Private School Application</title>
+        <title>New Trainer</title>
     </head>
     <body>
         <header>
@@ -43,38 +41,34 @@
         </header>
         <main>
             <div class="container mt-4">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First name</th>
-                            <th scope="col">Last name</th>
-                            <th scope="col">Subject</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${trainers}" var="trainer">
-                            <tr>
-                                <th>${trainer.id}</th>
-                                <td>${trainer.firstName}</td>
-                                <td>${trainer.lastName}</td>
-                                <td>${trainer.subject}</td>
-                                <td>
-                                    <a href="<c:url value='${editurl}/${trainer.id}'/>" class="btn btn-secondary btn-sm" role="button" aria-pressed="true">Edit</a>
-                                </td>
-                                <td>
-                                    <a href="<c:url value='${deleteurl}/${trainer.id}'/>" class="btn btn-secondary btn-sm" role="button" aria-pressed="true">Delete</a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-                <div class="container my-3">
-                    <td>
-                        <a href="<c:url value='${newurl}'/>" class="btn btn-secondary btn-sm" role="button" aria-pressed="true">Add trainer</a>
-                    </td>
+                <div id="form-container" class="card">
+                    <div id="form-title" class="card-header">Add a new trainer</div>
+                    <div class="card-body">
+                        <form:form method="POST" action="new" modelAttribute="trainer">
+                            <form:input type="hidden" path="id" id="id"/>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="firstName">First name</label>
+                                    <form:input type="text" class="form-control" maxlength="45" id="firstName" path="firstName" required="required"/>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="lastName">Last name</label>
+                                    <form:input type="text" class="form-control" maxlength="45" id="lastName" path="lastName" required="required"/>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <form:input type="text" class="form-control" maxlength="45" id="subject" path="subject" required="required"/>
+
+                            </div>
+                            <div class="alert alert-danger">${message}</div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <a href="<c:url value='${listurl}'/>" class="btn btn-primary" type="reset" role="button" aria-pressed="true">Cancel</a>
+                        </form:form>
+                    </div>
+
                 </div>
             </div>
         </main>

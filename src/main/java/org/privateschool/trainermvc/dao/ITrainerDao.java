@@ -7,5 +7,6 @@ public interface ITrainerDao {
 
     public List<Trainer> findAll();
 
-}
+    public boolean save(Trainer trainer);
 
+}

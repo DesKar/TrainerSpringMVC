@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class TrainerController {
 
     private String listurl = "list";
+    private String newurl = "new";
     private String editurl = "edit";
     private String updateurl = "update";
     private String deleteurl = "delete";
@@ -25,37 +26,37 @@ public class TrainerController {
 
     @Autowired
     MessageSource messageSource;
-    // index
 
     @RequestMapping(value = {"/", "/list"}, method = RequestMethod.GET)
-    public String listAllTrainers(ModelMap view, @RequestParam(required = false) String msg) {
+    public String listAllTrainers(ModelMap view) {
         List<Trainer> trainers = trainerService.findAll();
         view.addAttribute("trainers", trainers);
         view.addAttribute("editurl", editurl);
         view.addAttribute("deleteurl", deleteurl);
-        view.addAttribute("msg", msg);
+        view.addAttribute("newurl", newurl);
         return ("trainerlist");
     }
 
-//    @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
-//    public String newStudent(ModelMap view) {
-//        Student student = new Student();
-//        view.addAttribute("student", student);
-//        view.addAttribute("listurl", listurl);
-//        return "newstudent";
-//    }
-//
-//    @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
-//    public String saveStudent(ModelMap view, Student student) {
-//        view.addAttribute("listurl", listurl);
-//        if (studentService.save(student)) {
-//            view.addAttribute("message", new String("All good!"));
-//        } else {
-//            view.addAttribute("message", new String("All wrong!"));
-//        }
-//        return "newstudent";
-//    }
-//
+    @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
+    public String newStudent(ModelMap view) {
+        Trainer trainer = new Trainer();
+        view.addAttribute("trainer", trainer);
+        view.addAttribute("listurl", listurl);
+        return "newtrainer";
+    }
+
+    @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
+    public String saveStudent(ModelMap view, Trainer trainer) {
+        view.addAttribute("listurl", listurl);
+        if (trainerService.save(trainer)) {
+            return ("redirect:/list");
+        } else {
+            view.addAttribute("message", new String("Something went wrong. Please add the trainer again!"));
+            return ("redirect:/new");
+        }
+
+    }
+
 //    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 //    public String deleteStudent(ModelMap view, @PathVariable int id) {
 //        if (studentService.delete(id)) {
@@ -84,5 +85,4 @@ public class TrainerController {
 //        }
 //        return ("redirect:/list");
 //    }
-
 }

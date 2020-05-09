@@ -20,4 +20,10 @@ public class TrainerImpl implements ITrainer {
         return trainers;
     }
 
+    @Override
+    public boolean save(Trainer trainer) {
+        return dao.save(trainer);
+
+    }
+
 }

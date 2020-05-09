@@ -14,4 +14,13 @@ public class TrainerDaoImpl extends AbstractDao<Integer, Trainer> implements ITr
         return (List<Trainer>) criteria.list();
     }
 
+    @Override
+    public boolean save(Trainer trainer) {
+        boolean notSaved = persist(trainer);
+        if (notSaved) {
+            return false;
+        }
+        return true;
+    }
+
 }
