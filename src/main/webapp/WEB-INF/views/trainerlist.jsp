@@ -76,7 +76,7 @@
                         <a href="<c:url value='${newurl}'/>" class="btn btn-secondary btn-sm" role="button" aria-pressed="true">Add trainer</a>
                     </td>
                 </div>
-                <c:set var = "alert" scope = "session" value = "${alert}"/>
+                <c:set var = "alert" scope = "request" value = "${alert}"/>
                 <c:if test = "${not empty alert}">
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
                         ${alert}
@@ -85,7 +85,7 @@
                         </button>
                     </div>
                 </c:if>
-                <c:set var = "success" scope = "session" value = "${success}"/>
+                <c:set var = "success" scope = "request" value = "${success}"/>
 
                 <c:if test = "${not empty success}">
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
