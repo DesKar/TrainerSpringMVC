@@ -76,21 +76,25 @@
                         <a href="<c:url value='${newurl}'/>" class="btn btn-secondary btn-sm" role="button" aria-pressed="true">Add trainer</a>
                     </td>
                 </div>
-                <% String alert = (String) request.getAttribute("alert");
-                    String success = (String) request.getAttribute("success");
-                %>
-                <div class="alert alert-warning alert-dismissible fade hidden" role="alert">
-                    ${alert}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="alert alert-success alert-dismissible fade hidden" role="alert">                    
-                    ${success}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+                <c:set var = "alert" scope = "session" value = "${alert}"/>
+                <c:if test = "${not empty alert}">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        ${alert}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </c:if>
+                <c:set var = "success" scope = "session" value = "${success}"/>
+
+                <c:if test = "${not empty success}">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        ${success}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </c:if>
             </div>
         </main>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"

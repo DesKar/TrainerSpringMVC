@@ -86,7 +86,7 @@ public class TrainerController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String updateStudent(ModelMap view, Trainer trainer) {
         if (trainerService.update(trainer)) {
-            view.addAttribute("success", new String("Trainer was updated successfully!!"));
+            view.addAttribute("success", new String("Trainer was updated successfully!"));
         } else {
             view.addAttribute("alert", new String("Something went wrong. Please update the trainer again!"));
         }
